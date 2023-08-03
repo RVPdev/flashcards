@@ -3,13 +3,15 @@ import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { readCard, readDeck, updateCard } from "../../utils/api";
 import EditCardBreadcrumb from "../BreadCrumbs/EditCardBreadcrumb";
+import CardForm from "./CardForm";
 
 function EditCard() {
   const { deckId, cardId } = useParams(); // Get the deck and card IDs from the URL
   const history = useHistory();
 
   const [deck, setDeck] = useState([]); // State to hold the deck information
-  const [card, setCard] = useState({ // State to hold the card information
+  const [card, setCard] = useState({
+    // State to hold the card information
     front: "",
     back: "",
   });
@@ -44,34 +46,12 @@ function EditCard() {
     <div>
       <EditCardBreadcrumb deck={deck} cardId={cardId} />
       <h2>Edit Card</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="front">Front</label>
-          <textarea
-            id="front"
-            name="front"
-            className="form-control"
-            value={card.front}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="back">Back</label>
-          <textarea
-            id="back"
-            name="back"
-            className="form-control"
-            value={card.back}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="" className="btn btn-secondary" onClick={handleClick}>
-          Cancel
-        </button>
-        <button type="submit" className="btn btn-primary ml-3">
-          Save
-        </button>
-      </form>
+      <CardForm
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        handleClick={handleClick}
+        form={card}
+      />
     </div>
   );
 }

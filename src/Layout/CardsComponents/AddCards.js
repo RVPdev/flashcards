@@ -6,6 +6,7 @@ import {
 import { createCard, readDeck } from "../../utils/api";
 
 import CardBreadcrumbs from "../BreadCrumbs/CardBreadcrums"; // Import breadcrumbs component for navigation
+import CardForm from "./CardForm";
 
 function AddCards() {
   const { id } = useParams(); // Extract the deck id from the URL parameters
@@ -56,41 +57,15 @@ function AddCards() {
 
   return (
     <div className="mb-3">
-      <CardBreadcrumbs deck={deck} /> {/* Breadcrumbs component with deck details */}
-
+      <CardBreadcrumbs deck={deck} />{" "}
+      {/* Breadcrumbs component with deck details */}
       <h3>{deck.name}: Add Card</h3>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="front">Front</label>
-          <textarea
-            id="front"
-            name="front"
-            placeholder="Front side of card"
-            className="form-control"
-            value={form.front}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="back">Front</label>
-          <textarea
-            id="back"
-            name="back"
-            placeholder="Back side of card"
-            className="form-control"
-            value={form.back}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <button type="" className="btn btn-secondary" onClick={handleClick}>
-            Done
-          </button>
-          <button type="submit" className="btn btn-primary ml-3">
-            Save
-          </button>
-        </div>
-      </form>
+      <CardForm
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+        handleClick={handleClick}
+        form={form}
+      />
     </div>
   );
 }
